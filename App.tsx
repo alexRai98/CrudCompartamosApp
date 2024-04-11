@@ -6,14 +6,16 @@
  */
 
 import React from 'react';
-import { FormClient } from "./src/components/Home/FormClient/FormClient.tsx";
-import { ApplicationProvider } from "@ui-kitten/components";
+import {ApplicationProvider} from '@ui-kitten/components';
 import * as eva from '@eva-design/eva';
+import {AppProvider} from './src/store/ClientContext.tsx';
+import {Home} from './src/screens/Home/Home.tsx';
 function App(): React.JSX.Element {
-
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
-      <FormClient/>
+      <AppProvider>
+        <Home />
+      </AppProvider>
     </ApplicationProvider>
   );
 }

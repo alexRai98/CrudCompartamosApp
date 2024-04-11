@@ -1,44 +1,18 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {IndexPath, Select, SelectItem} from '@ui-kitten/components';
-import { StyleSheet, Text, View } from "react-native";
+import {StyleSheet, Text, View} from 'react-native';
+import {cities} from '../../shared/constans/Constans.ts';
 
-const data: string[] = [
-  'Amazonas',
-  'Áncash',
-  'Apurímac',
-  'Apurímac',
-  'Arequipa',
-  'Ayacucho',
-  'Cajamarca',
-  'Callao',
-  'Cusco',
-  'Huancavelica',
-  'Huánuco',
-  'Ica',
-  'Junín',
-  'La Libertad',
-  'Lambayeque',
-  'Lima',
-  'Loreto',
-  'Madre de Dios',
-  'Moquegua',
-  'Pasco',
-  'Piura',
-  'Puno',
-  'San Martín',
-  'Tacna',
-  'Tumbes',
-  'Ucayali',
-];
+interface ISelectCity {
+  selectedIndex: IndexPath;
+  setSelectedIndex: React.Dispatch<React.SetStateAction<IndexPath>>;
+}
 
-interface ISelectCity {}
-
-export const SelectCity: FC<ISelectCity> = () => {
-  const [selectedIndex, setSelectedIndex] = useState<IndexPath>(
-    new IndexPath(0),
-  );
-
-  const displayValue = data[selectedIndex.row];
+export const SelectCity: FC<ISelectCity> = ({
+  setSelectedIndex,
+  selectedIndex,
+}) => {
+  const displayValue = cities[selectedIndex.row];
 
   return (
     <View>
@@ -50,13 +24,14 @@ export const SelectCity: FC<ISelectCity> = () => {
         placeholder="Default"
         value={displayValue}
         selectedIndex={selectedIndex}
-        onSelect={(index: IndexPath) => setSelectedIndex(index)}>
-        {data.map(title => (
+        onSelect={(index: IndexPath) => {
+          setSelectedIndex(index);
+        }}>
+        {cities.map(title => (
           <SelectItem title={title} key={title} />
         ))}
       </Select>
     </View>
-
   );
 };
 
@@ -69,5 +44,6 @@ const styles = StyleSheet.create({
   select: {
     flex: 1,
     margin: 2,
+    marginBottom: 15,
   },
 });

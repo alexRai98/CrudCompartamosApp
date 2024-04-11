@@ -1,28 +1,21 @@
-import {IClient} from '../../../components/Home/ClientItem/infraestructure/IClient.ts';
 import {Animated, StyleSheet} from 'react-native';
 import FlatList = Animated.FlatList;
 import {ClientItem} from '../../../components/Home/ClientItem/ClientItem.tsx';
-import {FC, useEffect, useState} from 'react';
-import {ServiceGetAllClients} from '../../../service/Clients/ServiceCrudClient.ts';
+import React, {FC} from 'react';
+import {useClientList} from './state/ClientList.state.tsx';
 
-interface IClientList {}
+interface IClientList {
+  setVisibleFormModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export const ClientList: FC<IClientList> = () => {
-  const [items, setItems] = useState<IClient[]>();
+export const ClientList: FC<IClientList> = ({setVisibleFormModal}) => {
+  const {clientsList} = useClientList();
 
-  const fetchItems = async () => {
-    const items = await ServiceGetAllClients();
-    setItems(items);
-  };
-
-  useEffect(() => {
-    fetchItems();
-  }, []);
   return (
     <FlatList
       style={styles.container}
-      data={items}
-      renderItem={({item}) => <ClientItem key={item.DNI} client={item} />}
+      data={clientsList}
+      renderItem={({item}) => <ClientItem key={item.dni} client={item} setVisibleFormModal={setVisibleFormModal} />}
     />
   );
 };

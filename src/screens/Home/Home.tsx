@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import TopBar from '../../components/Home/TopBar/TopBar.tsx';
-import {ClientList} from '../../container/Home/ClientList/ClientList.tsx';
+import {HomeInfo} from '../../container/Home/HomeInfo/HomeInfo.tsx';
 
 export function Home(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -18,7 +18,7 @@ export function Home(): React.JSX.Element {
         backgroundColor={backgroundStyle.backgroundColor}
       />
       <TopBar title={'Clientes'} />
-      <ClientList />
+      <HomeInfo />
     </SafeAreaView>
   );
 }
